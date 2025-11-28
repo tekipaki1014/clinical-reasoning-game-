@@ -1,181 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
 :root {
-  --primary-color: #008080;
-  --primary-light: #e0f2f1;
-  --primary-dark: #004d40;
-  --secondary-color: #0077be;
-  --accent-color: #ff6f00;
-  --text-color: #333;
-  --text-light: #666;
-  --bg-color: #f5f7fa;
-  --card-bg: #ffffff;
-  --border-color: #e0e0e0;
-  --success-color: #4caf50;
-  --error-color: #f44336;
-  --warning-color: #ff9800;
-  
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* Infographic Color Palette */
+  --color-bg: #f0f4f8;
+  --color-text: #2d3748;
+  --color-text-light: #718096;
+  --color-white: #ffffff;
+
+  /* Category Colors */
+  --color-cat-morph: #FF6B6B;
+  /* 形態測定 - Red/Coral */
+  --color-cat-rom: #4ECDC4;
+  /* ROM - Teal */
+  --color-cat-mmt: #45B7D1;
+  /* MMT - Blue */
+  --color-cat-sensory: #96CEB4;
+  /* 感覚 - Green */
+  --color-cat-pain: #FFBE0B;
+  /* 疼痛 - Yellow */
+  --color-cat-circ: #FF006E;
+  /* 循環 - Pink */
+  --color-cat-balance: #8338EC;
+  /* バランス - Purple */
+  --color-cat-adl: #3A86FF;
+  /* ADL - Royal Blue */
+  --color-cat-cog: #FB5607;
+  /* 認知 - Orange */
+
+  /* UI Elements */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --radius-md: 12px;
+  --radius-lg: 20px;
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   margin: 0;
-  padding: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2rem;
 }
 
 /* Header */
 header {
-  background: var(--primary-color);
-  color: white;
-  padding: 1rem 0;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  letter-spacing: -0.05em;
+}
+
+/* Case Selection Cards */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.case-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   box-shadow: var(--shadow-md);
-  margin-bottom: 2rem;
-}
-
-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-h1 { margin: 0; font-size: 1.5rem; }
-
-/* Cards */
-.card {
-  background: var(--card-bg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-/* Buttons */
-.btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
 }
 
-.btn-primary {
-  background: var(--primary-color);
-  color: white;
-}
-.btn-primary:hover { background: var(--primary-dark); }
-
-.btn-secondary {
-  background: white;
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
-}
-.btn-secondary:hover { background: #f5f5f5; }
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.case-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Grid Layout */
-.grid {
+.case-card.selected {
+  border-color: var(--color-cat-adl);
+  background-color: #f8fbff;
+}
+
+.case-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+/* Assessment Grid (Masonry-ish) */
+.assessment-grid {
   display: grid;
-  gap: 1rem;
-}
-.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-.grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-
-/* Assessment Items */
-.assessment-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
 .assessment-item {
-  border: 1px solid var(--border-color);
+  background: var(--color-white);
   border-radius: var(--radius-md);
-  padding: 12px;
-  cursor: pointer;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-}
-
-.assessment-item.selected {
-  background: var(--primary-light);
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px var(--primary-color) inset;
-}
-
-.assessment-item .category {
-  font-size: 0.75rem;
-  color: var(--text-light);
-  margin-bottom: 4px;
-}
-
-.assessment-item .name {
-  font-weight: 600;
-}
-
-/* Results */
-.result-summary {
-  text-align: center;
-  padding: 2rem;
-  background: var(--primary-dark);
-  color: white;
-  border-radius: var(--radius-lg);
-  margin-bottom: 2rem;
-}
-
-.score-large {
-  font-size: 4rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-.badge-must { background: var(--error-color); color: white; }
-.badge-extra { background: var(--warning-color); color: white; }
-
-/* Floating Status */
-.floating-status {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: white;
   padding: 1rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  z-index: 100;
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
 }
+
+.assessment-item:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.assessment-item.selected {
+  background-color: var(--color-text);
+  color: var(--color-white);
+  border-color: var(--color-text);
+}
+
+/* Category Indicators */
+.category-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Floating Action Bar */
+.fab-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  gap: 1rem;
+  z-index: 100;
+}
+
+.btn-submit {
+  background: var(--color-text);
+  color: var(--color-white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.2s;
+}
+
+.btn-submit:hover {
+  transform: scale(1.05);
+}
+
+/* Results Section */
+.result-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.result-card {
+  background: var(--color-white);
+  width: 100%;
+  max-width: 800px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 3rem;
+  margin-top: 2rem;
+}
+
+.score-display {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.score-number {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(45deg, var(--color-cat-rom), var(--color-cat-adl));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feedback-section {
+  margin-bottom: 2rem;
+}
+
+.feedback-item {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--color-text-light);
+}
+
+.feedback-item.missing {
+  border-color: var(--color-cat-morph);
+}
+
+.feedback-item.extra {
+  border-color: var(--color-cat-pain);
+}
+
+.feedback-item.correct {
+  border-color: var(--color-cat-rom);
+}
+
+/* Utility Classes for Category Colors */
+.cat-morph {
+  background-color: var(--color-cat-morph);
+}
+
+.cat-rom {
+  background-color: var(--color-cat-rom);
+}
+
+.cat-mmt {
+  background-color: var(--color-cat-mmt);
+}
+
+.cat-sensory {
+  background-color: var(--color-cat-sensory);
+}
+
+.cat-pain {
+  background-color: var(--color-cat-pain);
+}
+
+.cat-circ {
+  background-color: var(--color-cat-circ);
+}
+
+.cat-balance {
+  background-color: var(--color-cat-balance);
+}
+
+.cat-adl {
+  background-color: var(--color-cat-adl);
+}
+
+.cat-cog {
+  background-color: var(--color-cat-cog);
+}
+
+.text-cat-morph {
+  color: var(--color-cat-morph);
+}
+
+/* ... add other text colors as needed */
